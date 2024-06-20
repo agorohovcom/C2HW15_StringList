@@ -1,6 +1,19 @@
 package stringlist;
 
+import exception.InvalidStringListInitialCapacity;
+
 public class StringListRealization implements StringList {
+
+    private String[] elementData;
+    private int size;
+
+    public StringListRealization(int initialCapacity) {
+        if (initialCapacity > 0) {
+            elementData = new String[initialCapacity];
+            size = 0;
+        } else throw new InvalidStringListInitialCapacity();
+    }
+
     @Override
     public String add(String item) {
         return "";
@@ -53,7 +66,7 @@ public class StringListRealization implements StringList {
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     @Override

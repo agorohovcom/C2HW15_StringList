@@ -21,12 +21,12 @@ public class StringListRealization implements StringList {
     @Override
     public String add(String item) {
         notNullParamChecker(item);
-        if (size < elementData.length) {
-            elementData[size++] = item;
-            return item;
-        } else {
+        if (size >= elementData.length) {
             throw new StringListIndexOutOfBoundsException();
+
         }
+        elementData[size++] = item;
+        return item;
     }
 
     @Override
@@ -34,15 +34,14 @@ public class StringListRealization implements StringList {
         notNullParamChecker(item);
         if (index >= elementData.length || size == elementData.length) {
             throw new StringListIndexOutOfBoundsException();
-        } else {
-            for (int i = size; i > index; i--) {
-                elementData[i] = elementData[i - 1];
-            }
-            elementData[index] = item;
-            size++;
-            System.out.println(Arrays.toString(elementData));
-            return item;
         }
+        for (int i = size; i > index; i--) {
+            elementData[i] = elementData[i - 1];
+        }
+        elementData[index] = item;
+        size++;
+        System.out.println(Arrays.toString(elementData));
+        return item;
     }
 
     @Override

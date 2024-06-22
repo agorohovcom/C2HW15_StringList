@@ -1,10 +1,9 @@
 package stringlist;
 
 import exception.InvalidStringListInitialCapacityException;
+import exception.StringListElementNotFoundException;
 import exception.StringListIndexOutOfBoundsException;
 import exception.StringListNullPointerException;
-
-import java.util.Arrays;
 
 public class StringListRealization implements StringList {
 
@@ -50,14 +49,22 @@ public class StringListRealization implements StringList {
             throw new StringListIndexOutOfBoundsException();
         }
         elementData[index] = item;
-        System.out.println(Arrays.toString(elementData));
         return item;
     }
 
     @Override
     public String remove(String item) {
         notNullParamChecker(item);
-        return "";
+        for (int i = 0; i < size; i++) {
+            if (elementData[i].equals(item)) {
+                for (int j = i; j < size - 1; j++) {
+                    elementData[j] = elementData[j + 1];
+                }
+                elementData[--size] = null;
+                return item;
+            }
+        }
+        throw new StringListElementNotFoundException();
     }
 
     @Override

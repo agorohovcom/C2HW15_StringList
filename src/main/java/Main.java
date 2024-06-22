@@ -22,13 +22,20 @@ public class Main {
 //        list.add(-1, "я минус");
         System.out.println("------------------------------------------------");
 
-        list.set(4, "set");
-        list.set(3, "set");
-        list.set(2, "set");
-        list.set(1, "set");
+//        list.set(4, "set");
+//        list.set(3, "set");
+//        list.set(2, "set");
+//        list.set(1, "set");
         list.set(0, "set");
 //        list.set(0, null);
 //        list.set(-1, "set");
 //        list.set(5, "set");
+        System.out.println("------------------------------------------------");
+
+        list.set(0, "one");
+        list.remove("two");
+        list.remove("one");
+//        list.remove("set");
+//        list.remove(null);
     }
 }

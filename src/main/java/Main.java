@@ -18,6 +18,17 @@ public class Main {
         System.out.println("list.size() = " + list.size());
         list.add(0, "я ноль");
         System.out.println("list.size() = " + list.size());
-        list.add(0, "я ноль");
+//        list.add(0, "я ноль");
+//        list.add(-1, "я минус");
+        System.out.println("------------------------------------------------");
+
+        list.set(4, "set");
+        list.set(3, "set");
+        list.set(2, "set");
+        list.set(1, "set");
+        list.set(0, "set");
+//        list.set(0, null);
+//        list.set(-1, "set");
+//        list.set(5, "set");
     }
 }

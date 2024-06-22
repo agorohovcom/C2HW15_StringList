@@ -32,7 +32,7 @@ public class StringListRealization implements StringList {
     @Override
     public String add(int index, String item) {
         notNullParamChecker(item);
-        if (index >= elementData.length || size == elementData.length) {
+        if (index >= elementData.length || size == elementData.length || index < 0) {
             throw new StringListIndexOutOfBoundsException();
         }
         for (int i = size; i > index; i--) {
@@ -40,19 +40,18 @@ public class StringListRealization implements StringList {
         }
         elementData[index] = item;
         size++;
-        System.out.println(Arrays.toString(elementData));
         return item;
     }
 
     @Override
     public String set(int index, String item) {
         notNullParamChecker(item);
-        if (index < size) {
-            elementData[index] = item;
-            return item;
-        } else {
+        if (index >= size || index < 0) {
             throw new StringListIndexOutOfBoundsException();
         }
+        elementData[index] = item;
+        System.out.println(Arrays.toString(elementData));
+        return item;
     }
 
     @Override

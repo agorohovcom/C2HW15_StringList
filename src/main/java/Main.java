@@ -1,6 +1,8 @@
 import stringlist.StringList;
 import stringlist.StringListRealization;
 
+import java.util.Arrays;
+
 public class Main {
     public static void main(String[] args) {
         StringList list = new StringListRealization(5);
@@ -37,5 +39,12 @@ public class Main {
         list.remove("one");
 //        list.remove("set");
 //        list.remove(null);
+        System.out.println("------------------------------------------------");
+
+        System.out.println(Arrays.toString(list.toArray()));
+        System.out.println("list.size() = " + list.size());
+        System.out.println(list.remove(5));
+        System.out.println(Arrays.toString(list.toArray()));
+        System.out.println("list.size() = " + list.size());
     }
 }

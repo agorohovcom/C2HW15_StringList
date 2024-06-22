@@ -69,7 +69,15 @@ public class StringListRealization implements StringList {
 
     @Override
     public String remove(int index) {
-        return "";
+        if (index >= size || index < 0) {
+            throw new StringListIndexOutOfBoundsException();
+        }
+        String result = elementData[index];
+        for (int i = index; i < size - 1; i++) {
+            elementData[i] = elementData[i + 1];
+        }
+        elementData[--size] = null;
+        return result;
     }
 
     @Override
@@ -118,7 +126,9 @@ public class StringListRealization implements StringList {
 
     @Override
     public String[] toArray() {
-        return new String[0];
+        String[] result = new String[size];
+        System.arraycopy(elementData, 0, result, 0, size);
+        return result;
     }
 
     private void notNullParamChecker(Object param) {

@@ -5,6 +5,8 @@ import exception.StringListElementNotFoundException;
 import exception.StringListIndexOutOfBoundsException;
 import exception.StringListNullPointerException;
 
+import java.util.Arrays;
+
 public class StringListRealization implements StringList {
 
     private String[] elementData;
@@ -83,7 +85,7 @@ public class StringListRealization implements StringList {
     @Override
     public boolean contains(String item) {
         notNullParamChecker(item);
-        return false;
+        return Arrays.stream(elementData).limit(size).anyMatch(s -> s.equals(item));
     }
 
     @Override

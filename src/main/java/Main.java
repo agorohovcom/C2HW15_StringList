@@ -6,19 +6,25 @@ import java.util.Arrays;
 public class Main {
     public static void main(String[] args) {
         StringList list = new StringListRealization(5);
+        System.out.println(Arrays.toString(list.toArray()));
         System.out.println("------------------------------------------------");
 
         System.out.println(list.add("one"));
+        System.out.println(Arrays.toString(list.toArray()));
         System.out.println("list.size() = " + list.size());
         System.out.println(list.add("two"));
+        System.out.println(Arrays.toString(list.toArray()));
         System.out.println("list.size() = " + list.size());
         System.out.println(list.add("three"));
+        System.out.println(Arrays.toString(list.toArray()));
         System.out.println("list.size() = " + list.size());
         System.out.println("------------------------------------------------");
 
-        list.add(1, "два");
+        System.out.println("list.add(1, \"два\"): " + list.add(1, "два"));
+        System.out.println(Arrays.toString(list.toArray()));
         System.out.println("list.size() = " + list.size());
-        list.add(0, "я ноль");
+        System.out.println("list.add(0, \"я ноль\"): " + list.add(0, "я ноль"));
+        System.out.println(Arrays.toString(list.toArray()));
         System.out.println("list.size() = " + list.size());
 //        list.add(0, "я ноль");
 //        list.add(-1, "я минус");
@@ -28,7 +34,9 @@ public class Main {
 //        list.set(3, "set");
 //        list.set(2, "set");
 //        list.set(1, "set");
-        list.set(0, "set");
+        System.out.println("list.set(0, \"set\"): " + list.set(0, "set"));
+        System.out.println(Arrays.toString(list.toArray()));
+        System.out.println("list.size() = " + list.size());
 //        list.set(0, null);
 //        list.set(-1, "set");
 //        list.set(5, "set");
@@ -43,8 +51,16 @@ public class Main {
 
         System.out.println(Arrays.toString(list.toArray()));
         System.out.println("list.size() = " + list.size());
-        System.out.println(list.remove(5));
+        System.out.println(list.remove(0));
         System.out.println(Arrays.toString(list.toArray()));
         System.out.println("list.size() = " + list.size());
+        System.out.println("------------------------------------------------");
+
+        System.out.println("list.contains(\"такого нету\"): " + list.contains("такого нету"));
+        System.out.println("list.contains(\"three\"): " + list.contains("three"));
+//        System.out.println("list.contains(null): " + list.contains(null));
+        System.out.println("------------------------------------------------");
+
+
     }
 }

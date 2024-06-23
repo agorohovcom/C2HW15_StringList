@@ -91,13 +91,23 @@ public class StringListRealization implements StringList {
     @Override
     public int indexOf(String item) {
         notNullParamChecker(item);
-        return 0;
+        for (int i = 0; i < size; i++) {
+            if (elementData[i].equals(item)) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     @Override
     public int lastIndexOf(String item) {
         notNullParamChecker(item);
-        return 0;
+        for (int i = size - 1; i >= 0; i--) {
+            if (elementData[i].equals(item)) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     @Override

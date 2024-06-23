@@ -61,6 +61,16 @@ public class Main {
 //        System.out.println("list.contains(null): " + list.contains(null));
         System.out.println("------------------------------------------------");
 
+        System.out.println(list.indexOf("два"));
+        System.out.println(list.indexOf("three"));
+        System.out.println(list.indexOf("thrкпкеee"));
+        System.out.println("------------------------------------------------");
 
+        list.add("three");
+        list.add("ещё элемент");
+        System.out.println(Arrays.toString(list.toArray()));
+        System.out.println(list.lastIndexOf("два"));
+        System.out.println(list.lastIndexOf("three"));
+        System.out.println(list.lastIndexOf("thrrghfgee"));
     }
 }

@@ -121,7 +121,15 @@ public class StringListRealization implements StringList {
     @Override
     public boolean equals(StringList otherList) {
         notNullParamChecker(otherList);
-        return false;
+        if (size != otherList.size()) {
+            return false;
+        }
+        for (int i = 0; i < size; i++) {
+            if (!elementData[i].equals(otherList.get(i))) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override

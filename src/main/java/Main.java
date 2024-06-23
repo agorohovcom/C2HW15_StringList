@@ -77,6 +77,16 @@ public class Main {
         System.out.println(list.get(0));
         System.out.println("------------------------------------------------");
 
+        System.out.println(Arrays.toString(list.toArray()));
+        StringList list2 = new StringListRealization(list.size());
+        for (int i = 0; i < list.size(); i++) {
+            list2.add(list.get(i));
+        }
+        System.out.println(Arrays.toString(list2.toArray()));
+        System.out.println("list.equals(list2): " + list.equals(list2));
+        list2.remove(0);
+        System.out.println("list.equals(list2): " + list.equals(list2));
+//        System.out.println("list.equals(null): " + list.equals(null));
 
     }
 }

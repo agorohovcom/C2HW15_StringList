@@ -22,7 +22,7 @@ class StringListRealizationTest {
 
     @Test
     void shouldAddElementCorrectly() {
-        // проверка на null
+        // ожидаем исключение при добавлении null
         assertThrows(StringListNullPointerException.class,
                 () -> list.add(null));
 
@@ -34,7 +34,7 @@ class StringListRealizationTest {
 
         // ожидаем исключение при добавлении элемента в заполненный лист
         assertThrows(StringListIndexOutOfBoundsException.class,
-                () -> list.add("This item will not fit"));
+                () -> list.add("This item will not be added"));
     }
 
     @Test
@@ -43,14 +43,15 @@ class StringListRealizationTest {
         assertThrows(StringListNullPointerException.class,
                 () -> list.add(0, null));
         assertThrows(StringListIndexOutOfBoundsException.class,
-                () -> list.add(-1, "This item will not fit"));
+                () -> list.add(-1, "This item will not be added"));
         assertThrows(StringListIndexOutOfBoundsException.class,
-                () -> list.add(list.size() + 1, "This item will not fit"));
+                () -> list.add(list.size() + 1, "This item will not be added"));
 
         String expected1 = "expected1";
         String expected2 = "expected2";
         int expectedListSize = list.size();
         list.add(0, expected1);
+        // после успешного добавления одного элемента size должен увеличиться на 1
         assertEquals(expectedListSize + 1, list.size());
         assertEquals(expected1, list.get(0));
         assertEquals(expected2, list.add(2, expected2));
@@ -69,6 +70,22 @@ class StringListRealizationTest {
 
     @Test
     void set() {
+        // ожидаем исключение при изменении на null, по отрицательному индексу и индексу больше чем size
+        assertThrows(StringListNullPointerException.class,
+                () -> list.set(0, null));
+        assertThrows(StringListIndexOutOfBoundsException.class,
+                () -> list.set(-1, "This item will not be set"));
+        assertThrows(StringListIndexOutOfBoundsException.class,
+                () -> list.set(list.size() + 1, "This item will not be set"));
+
+        String expected1 = "expected1";
+        String expected2 = "expected2";
+        int expectedSize = list.size();
+        list.set(0, expected1);
+        assertEquals(expected1, list.get(0));
+        assertEquals(expected2, list.set(2, expected2));
+        // после успешного изменения элемента size должен остаться прежним
+        assertEquals(expectedSize, list.size());
     }
 
     @Test

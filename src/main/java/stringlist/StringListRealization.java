@@ -144,7 +144,10 @@ public class StringListRealization implements StringList {
 
     @Override
     public void clear() {
-
+        for (int i = 0; i < size; i++) {
+            elementData[i] = null;
+        }
+        size = 0;
     }
 
     @Override

@@ -112,7 +112,10 @@ public class StringListRealization implements StringList {
 
     @Override
     public String get(int index) {
-        return "";
+        if (index >= size || index < 0) {
+            throw new StringListIndexOutOfBoundsException();
+        }
+        return elementData[index];
     }
 
     @Override

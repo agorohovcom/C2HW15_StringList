@@ -72,5 +72,11 @@ public class Main {
         System.out.println(list.lastIndexOf("два"));
         System.out.println(list.lastIndexOf("three"));
         System.out.println(list.lastIndexOf("thrrghfgee"));
+        System.out.println("------------------------------------------------");
+
+        System.out.println(list.get(0));
+        System.out.println("------------------------------------------------");
+
+
     }
 }

@@ -1,5 +1,6 @@
 package stringlist;
 
+import exception.StringListElementNotFoundException;
 import exception.StringListIndexOutOfBoundsException;
 import exception.StringListNullPointerException;
 import org.junit.jupiter.api.BeforeEach;
@@ -69,7 +70,7 @@ class StringListRealizationTest {
     }
 
     @Test
-    void set() {
+    void shouldSetElementByIndexCorrectly() {
         // ожидаем исключение при изменении на null, по отрицательному индексу и индексу больше чем size
         assertThrows(StringListNullPointerException.class,
                 () -> list.set(0, null));
@@ -89,11 +90,35 @@ class StringListRealizationTest {
     }
 
     @Test
-    void remove() {
+    void shouldRemoveElementByStringValueCorrectly() {
+        // ожидаем исключение при удалении null и элемента, которого нет в списке
+        assertThrows(StringListNullPointerException.class,
+                () -> list.remove(null));
+        assertThrows(StringListElementNotFoundException.class,
+                () -> list.remove("No such element"));
+
+        String expected = "two";
+        int expectedSize = list.size();
+        assertEquals(expected, list.remove(expected));
+        // после успешного удаление элемента size должен уменьшиться на 1
+        assertEquals(expectedSize - 1, list.size());
     }
 
     @Test
-    void testRemove() {
+    void shouldRemoveElementByIndexCorrectly() {
+        // ожидаем исключение при удалении элемента с индексом меньше 0 или равным и больше size
+        assertThrows(StringListIndexOutOfBoundsException.class,
+                () -> list.remove(-1));
+        assertThrows(StringListIndexOutOfBoundsException.class,
+                () -> list.remove(list.size()));
+        assertThrows(StringListIndexOutOfBoundsException.class,
+                () -> list.remove(list.size() + 1));
+
+        String expected = list.get(1);
+        int expectedSize = list.size();
+        assertEquals(expected, list.remove(1));
+        // после успешного удаления элемента size должен уменьшиться на 1
+        assertEquals(expectedSize - 1, list.size());
     }
 
     @Test

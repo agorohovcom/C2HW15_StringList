@@ -88,5 +88,8 @@ public class Main {
         System.out.println("list.equals(list2): " + list.equals(list2));
 //        System.out.println("list.equals(null): " + list.equals(null));
 
+        System.out.println("------------------------------------------------");
+        System.out.println("list.isEmpty(): " + list.isEmpty());
+        System.out.println("new StringListRealization(1).isEmpty(): " + new StringListRealization(1).isEmpty());
     }
 }

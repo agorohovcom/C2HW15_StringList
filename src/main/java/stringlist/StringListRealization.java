@@ -139,7 +139,7 @@ public class StringListRealization implements StringList {
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return !(size > 0);
     }
 
     @Override

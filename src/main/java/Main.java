@@ -99,5 +99,13 @@ public class Main {
         System.out.println(Arrays.toString(list.toArray()));
         System.out.println(list.size());
         System.out.println("------------------------------------------------");
+
+        StringList l = new StringListRealization(5);
+        l.add("1");
+        l.add("2");
+        l.add("3");
+        System.out.println(Arrays.toString(l.toArray()));
+        l.add(3, "34534");
+        System.out.println(Arrays.toString(l.toArray()));
     }
 }

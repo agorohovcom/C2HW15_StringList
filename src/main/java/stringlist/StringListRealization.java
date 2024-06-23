@@ -33,7 +33,8 @@ public class StringListRealization implements StringList {
     @Override
     public String add(int index, String item) {
         notNullParamChecker(item);
-        if (index >= elementData.length || size == elementData.length || index < 0) {
+//        if (index >= elementData.length || size == elementData.length || index < 0) {
+        if (index > size || size == elementData.length || index < 0) {
             throw new StringListIndexOutOfBoundsException();
         }
         for (int i = size; i > index; i--) {

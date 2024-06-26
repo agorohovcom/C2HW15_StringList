@@ -6,8 +6,7 @@ import exception.StringListNullPointerException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 class StringListRealizationTest {
 
@@ -122,15 +121,42 @@ class StringListRealizationTest {
     }
 
     @Test
-    void contains() {
+    void shouldCheckContainsElementCorrectly() {
+        // ожидаем исключение при передаче null
+        assertThrows(StringListNullPointerException.class,
+                () -> list.contains(null));
+
+        assertTrue(list.contains(list.get(0)));
+        assertFalse(list.contains("There is no such element"));
     }
 
     @Test
-    void indexOf() {
+    void shouldReturnIndexOfElementCorrectly() {
+        // ожидаем исключение при передаче null
+        assertThrows(StringListNullPointerException.class,
+                () -> list.indexOf(null));
+
+        int expectedIndex1 = 1;
+        int expectedIndex2 = 2;
+        int expectedFailIndex = -1;
+        assertEquals(expectedIndex1, list.indexOf(list.get(expectedIndex1)));
+        assertEquals(expectedIndex2, list.indexOf("three"));
+        assertEquals(expectedFailIndex, list.indexOf("There is no such element"));
     }
 
     @Test
-    void lastIndexOf() {
+    void shouldReturnLastIndexOfElementCorrectly() {
+        // ожидаем исключение при передаче null
+        assertThrows(StringListNullPointerException.class,
+                () -> list.lastIndexOf(null));
+
+        int expectedFailIndex = -1;
+        // добавим в список повторяющиеся элементы для теста
+        list.add(0, list.get(0));
+        list.add(4, list.get(2));
+        assertEquals(1, list.lastIndexOf("one"));
+        assertEquals(4, list.lastIndexOf("two"));
+        assertEquals(expectedFailIndex, list.lastIndexOf("There is no such element"));
     }
 
     @Test

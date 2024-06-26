@@ -176,11 +176,26 @@ class StringListRealizationTest {
     }
 
     @Test
-    void testEquals() {
+    void shouldDoEqualsListsCorrectly() {
+        // ожидаем исключение при передаче null
+        assertThrows(StringListNullPointerException.class,
+                () -> list.equals(null));
+
+        StringList anotherList = new StringListRealization(list.size());
+        for (int i = 0; i < list.size(); i++) {
+            anotherList.add(list.get(i));
+        }
+        assertTrue(list.equals(anotherList));
+        anotherList.remove(0);
+        assertFalse(list.equals(anotherList));
     }
 
     @Test
-    void size() {
+    void shouldGetSizeCorrectly() {
+        int expectedSize = 3;
+        assertEquals(expectedSize, list.size());
+        list.add("Another element");
+        assertNotEquals(expectedSize, list.size());
     }
 
     @Test

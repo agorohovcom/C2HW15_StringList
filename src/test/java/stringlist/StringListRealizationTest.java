@@ -6,6 +6,8 @@ import exception.StringListNullPointerException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class StringListRealizationTest {
@@ -199,14 +201,29 @@ class StringListRealizationTest {
     }
 
     @Test
-    void isEmpty() {
+    void shouldReturnIsEmptyCorrectly() {
+        assertFalse(list.isEmpty());
+        list.clear();
+        assertTrue(list.isEmpty());
+        list = new StringListRealization(1);
+        assertTrue(list.isEmpty());
+
     }
 
     @Test
-    void clear() {
+    void shouldClearCorrectly() {
+        list.clear();
+        assertTrue(list.isEmpty());
     }
 
     @Test
-    void toArray() {
+    void ShouldMapToArrayCorrectly() {
+        String[] excepted = new String[list.size()];
+        for (int i = 0; i < excepted.length; i++) {
+            excepted[i] = list.get(i);
+        }
+        assertArrayEquals(excepted, list.toArray());
+        list.set(2, "Another value");
+        assertFalse(Arrays.equals(excepted, list.toArray()));
     }
 }

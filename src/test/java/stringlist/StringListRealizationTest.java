@@ -160,7 +160,19 @@ class StringListRealizationTest {
     }
 
     @Test
-    void get() {
+    void shouldGetElementCorrectly() {
+        // ожидаем исключение, если индекс меньше 0 или >= size
+        assertThrows(StringListIndexOutOfBoundsException.class,
+                () -> list.get(-1));
+        assertThrows(StringListIndexOutOfBoundsException.class,
+                () -> list.get(list.size()));
+        assertThrows(StringListIndexOutOfBoundsException.class,
+                () -> list.get(list.size() + 1));
+
+        String expected1 = "one";
+        String expected2 = "two";
+        assertEquals(expected1, list.get(0));
+        assertEquals(expected2, list.get(list.indexOf(expected2)));
     }
 
     @Test

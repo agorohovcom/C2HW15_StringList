@@ -33,21 +33,15 @@ class StringListRealizationTest {
         list.add(expected1);
         assertEquals(expected1, list.get(3));
         assertEquals(expected2, list.add(expected2));
-
-        // ожидаем исключение при добавлении элемента в заполненный лист
-        assertThrows(StringListIndexOutOfBoundsException.class,
-                () -> list.add("This item will not be added"));
     }
 
     @Test
     void shouldAddElementByIndexCorrectly() {
-        // ожидаем исключение при добавлении null, по отрицательному индексу и индексу больше чем size
+        // ожидаем исключение при добавлении null и по отрицательному индексу
         assertThrows(StringListNullPointerException.class,
                 () -> list.add(0, null));
         assertThrows(StringListIndexOutOfBoundsException.class,
                 () -> list.add(-1, "This item will not be added"));
-        assertThrows(StringListIndexOutOfBoundsException.class,
-                () -> list.add(list.size() + 1, "This item will not be added"));
 
         String expected1 = "expected1";
         String expected2 = "expected2";
@@ -72,11 +66,13 @@ class StringListRealizationTest {
 
     @Test
     void shouldSetElementByIndexCorrectly() {
-        // ожидаем исключение при изменении на null, по отрицательному индексу и индексу больше чем size
+        // ожидаем исключение при изменении на null, по отрицательному индексу и индексу >= size
         assertThrows(StringListNullPointerException.class,
                 () -> list.set(0, null));
         assertThrows(StringListIndexOutOfBoundsException.class,
                 () -> list.set(-1, "This item will not be set"));
+        assertThrows(StringListIndexOutOfBoundsException.class,
+                () -> list.set(list.size(), "This item will not be set"));
         assertThrows(StringListIndexOutOfBoundsException.class,
                 () -> list.set(list.size() + 1, "This item will not be set"));
 

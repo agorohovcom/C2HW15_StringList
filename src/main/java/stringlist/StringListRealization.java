@@ -11,9 +11,17 @@ public class StringListRealization implements StringList {
 
     private String[] elementData;
     private int size;
+    private final double LOAD_FACTOR = 0.75d;
+    private final int CAPACITY_DECOMPRESS_VALUE = 10;
+    private final int DEFAULT_CAPACITY_VALUE = 10;
+
+    public StringListRealization() {
+        elementData = new String[DEFAULT_CAPACITY_VALUE];
+        size = 0;
+    }
 
     public StringListRealization(int initialCapacity) {
-        if (initialCapacity > 0) {
+        if (initialCapacity >= 0) {
             elementData = new String[initialCapacity];
             size = 0;
         } else throw new InvalidStringListInitialCapacityException();
@@ -21,20 +29,17 @@ public class StringListRealization implements StringList {
 
     @Override
     public String add(String item) {
-        notNullParamChecker(item);
-        if (size >= elementData.length) {
-            throw new StringListIndexOutOfBoundsException();
-
-        }
+        notNullParamCheckPlease(item);
+        decompressElementDataCapacityPlease();
         elementData[size++] = item;
         return item;
     }
 
     @Override
     public String add(int index, String item) {
-        notNullParamChecker(item);
-//        if (index >= elementData.length || size == elementData.length || index < 0) {
-        if (index > size || size == elementData.length || index < 0) {
+        notNullParamCheckPlease(item);
+        decompressElementDataCapacityPlease();
+        if (index < 0) {
             throw new StringListIndexOutOfBoundsException();
         }
         for (int i = size; i > index; i--) {
@@ -47,7 +52,7 @@ public class StringListRealization implements StringList {
 
     @Override
     public String set(int index, String item) {
-        notNullParamChecker(item);
+        notNullParamCheckPlease(item);
         if (index >= size || index < 0) {
             throw new StringListIndexOutOfBoundsException();
         }
@@ -57,7 +62,7 @@ public class StringListRealization implements StringList {
 
     @Override
     public String remove(String item) {
-        notNullParamChecker(item);
+        notNullParamCheckPlease(item);
         for (int i = 0; i < size; i++) {
             if (elementData[i].equals(item)) {
                 for (int j = i; j < size - 1; j++) {
@@ -75,6 +80,7 @@ public class StringListRealization implements StringList {
         if (index >= size || index < 0) {
             throw new StringListIndexOutOfBoundsException();
         }
+        trimToSizePlus10Please();
         String result = elementData[index];
         for (int i = index; i < size - 1; i++) {
             elementData[i] = elementData[i + 1];
@@ -85,13 +91,13 @@ public class StringListRealization implements StringList {
 
     @Override
     public boolean contains(String item) {
-        notNullParamChecker(item);
+        notNullParamCheckPlease(item);
         return Arrays.stream(elementData).limit(size).anyMatch(s -> s.equals(item));
     }
 
     @Override
     public int indexOf(String item) {
-        notNullParamChecker(item);
+        notNullParamCheckPlease(item);
         for (int i = 0; i < size; i++) {
             if (elementData[i].equals(item)) {
                 return i;
@@ -102,7 +108,7 @@ public class StringListRealization implements StringList {
 
     @Override
     public int lastIndexOf(String item) {
-        notNullParamChecker(item);
+        notNullParamCheckPlease(item);
         for (int i = size - 1; i >= 0; i--) {
             if (elementData[i].equals(item)) {
                 return i;
@@ -121,7 +127,7 @@ public class StringListRealization implements StringList {
 
     @Override
     public boolean equals(StringList otherList) {
-        notNullParamChecker(otherList);
+        notNullParamCheckPlease(otherList);
         if (size != otherList.size()) {
             return false;
         }
@@ -145,9 +151,7 @@ public class StringListRealization implements StringList {
 
     @Override
     public void clear() {
-        for (int i = 0; i < size; i++) {
-            elementData[i] = null;
-        }
+        elementData = new String[DEFAULT_CAPACITY_VALUE];
         size = 0;
     }
 
@@ -158,9 +162,23 @@ public class StringListRealization implements StringList {
         return result;
     }
 
-    private void notNullParamChecker(Object param) {
+    private void notNullParamCheckPlease(Object param) {
         if (param == null) {
             throw new StringListNullPointerException();
+        }
+    }
+
+    private void decompressElementDataCapacityPlease() {
+        if ((size + 1) > (elementData.length * LOAD_FACTOR)) {
+            elementData = Arrays.copyOf(elementData, elementData.length + CAPACITY_DECOMPRESS_VALUE);
+        }
+    }
+
+    private void trimToSizePlus10Please() {
+        if ((size * 2) < elementData.length) {
+            System.out.println("capacity before trim: " + elementData.length);
+            elementData = Arrays.copyOf(elementData, size + DEFAULT_CAPACITY_VALUE);
+            System.out.println("capacity after trim: " + elementData.length);
         }
     }
 }

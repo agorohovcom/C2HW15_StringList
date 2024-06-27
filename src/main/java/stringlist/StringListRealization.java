@@ -176,9 +176,7 @@ public class StringListRealization implements StringList {
 
     private void trimToSizePlus10Please() {
         if ((size * 2) < elementData.length) {
-            System.out.println("capacity before trim: " + elementData.length);
             elementData = Arrays.copyOf(elementData, size + DEFAULT_CAPACITY_VALUE);
-            System.out.println("capacity after trim: " + elementData.length);
         }
     }
 }
